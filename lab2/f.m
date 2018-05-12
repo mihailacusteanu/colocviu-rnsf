@@ -1,6 +1,8 @@
-
-
 function [fnet] = f (wi, xij)
     net_j = sum(wi .* xij);
-    fnet = net_j;
+    if net_j >= 0
+        fnet = 1;
+    else
+        fnet = 0;
+    end
 endfunction
