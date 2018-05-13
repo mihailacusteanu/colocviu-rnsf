@@ -34,6 +34,6 @@ yjo = f_activare_logistica(netjo);
 
 [M,y] = max(yjo,[],2); #Extrage coloana maxima pentru a forma vectorul y =yo de iesire
 
-Eroare =  (1/nr_loturi_invatare) * sum(y); #
+Eroare =   sum((d-y).^2)/(2*nr_loturi_invatare); #
 
 #######################################TEST2
