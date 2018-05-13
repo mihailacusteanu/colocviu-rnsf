@@ -11,6 +11,10 @@ Pt1 = extract_features(my_path_a, index, numar_vocale_citite);
 Pt2 = extract_features(my_path_e,index, numar_vocale_citite);
 scale = 1200000;
 
+Pt1 = Pt1 ./ scale;
+Pt2 = Pt2 ./ scale;
+
+
 ##############PRELUCRATE DATE PENTRU CALCUL PONDERI#################
 
 numar_vocale_citite = numar_vocale_citite;#*0.8;
@@ -46,11 +50,12 @@ x = x_new;
 x_invatare = x(1:60,:);
 d_invatare = d(1:60,:);
 
-w = calc_ponderi (x_invatare, w, eta,d_invatare); #ponderi finale dupa lotul de invatare
+eroare_maxima = 0.0001;#10%
+w = calc_ponderi_adaline (x_invatare, w, eta,d_invatare, eroare_maxima); #ponderi finale dupa lotul de invatare
 
-w0 = w(1)
-w1 = w(2)
-w2 = w(3)
+w0 = w(1);
+w1 = w(2);
+w2 = w(3);
 
 
 
@@ -64,14 +69,22 @@ plot(Pt2(:,1),Pt2(:,2), 'ob');
 
 ##############EXTRAGERE CARACTERISTICI LOT TESTARE#################
 x_testare = x(1:60,:);
-x_testare = d(1:60,:);
+d_testare = d(1:60,:);
+
+
+
+y = sum(x_testare*w', 2) > 0;
+
+%y == d;
 
 size1 = size(x_testare)(1);
 ##############TESTARE#################
 for j =1:size1
     A = f(x_testare(j), w);
-    A > 0 
+    
 end
+
+
 
 
 

@@ -1,13 +1,13 @@
 
-function [Pt1] = extragere_carc_pt_test_vocale (my_path)
+
+function [Pt1] = extract_features (my_path,index, number_of_records)
 files_path = dir(strcat(my_path,'*.wav'));
-number_of_records = size(files_path)(1); # nr total de fisiere
-index_fisier_lot_invatare = number_of_records - number_of_records * 0.2 + 1; # 20% din fisiere folosite pentru lotul de invatare
+#number_of_records = size(files_path)(1); # nr total de fisiere
+#number_of_records = number_of_records * 0.8; #reducem lotul de invatare la 80% pentru a avea si un lot de invatare
 Pt1=[];
 
  Fe = 44100;
-    for(i=33:40)
-    i
+    for(i=index:number_of_records)
       current_analog_record = audioread([my_path files_path(i).name]);
       current_analog_record =current_analog_record(:,1);
       current_fft_record = abs(fft(current_analog_record));
